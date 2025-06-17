@@ -28,7 +28,8 @@
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"]
-    }
+    },
+    "downlevelIteration": true
   },
   "include": [
     "src"

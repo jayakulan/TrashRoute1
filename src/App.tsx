@@ -14,6 +14,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import RequestPickup from './pages/RequestPickup';
 import TrackPickup from './pages/TrackPickup';
+import Schedule from './pages/Schedule';
+import Contact from './pages/Contact';
+import Account from './pages/Account';
 
 const App: React.FC = () => {
   return (
@@ -30,6 +33,9 @@ const App: React.FC = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/request-pickup" element={<RequestPickup />} />
               <Route path="/track-pickup" element={<TrackPickup />} />
+              <Route path="/schedule" element={<Schedule />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/account" element={<Account />} />
             </Routes>
           </main>
           <Footer />

@@ -14,7 +14,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondary,
   Divider,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';

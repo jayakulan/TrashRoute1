@@ -117,7 +117,7 @@ const Register: React.FC = () => {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        role: formData.role,
+        role: formData.role as User['role'],
         phone: formData.phone || undefined,
         address: formData.address || undefined,
       };

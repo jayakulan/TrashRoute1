@@ -7,7 +7,6 @@ import {
   Typography,
   Card,
   CardContent,
-  CardMedia,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -40,15 +39,30 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <Box
         sx={{
-          bgcolor: 'primary.main',
+          bgcolor: '#A8D59B',
           color: 'white',
           py: 8,
           position: 'relative',
           overflow: 'hidden',
+          textAlign: 'center',
         }}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
+          <Grid container spacing={4} alignItems="center" justifyContent="center">
+            <Grid item xs={12} md={6}>
+              <Box
+                component="img"
+                src="/hero-image.png"
+                alt="Waste Management"
+                sx={{
+                  width: '100%',
+                  maxWidth: 500,
+                  height: 'auto',
+                  display: 'block',
+                  margin: 'auto',
+                }}
+              />
+            </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant="h2" component="h1" gutterBottom>
                 Smart Waste Management
@@ -57,7 +71,7 @@ const Home: React.FC = () => {
                 Connect with waste processing companies and manage your waste efficiently.
               </Typography>
               <Box sx={{ mt: 4 }}>
-                <Typography variant="h4" align="center" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                   Choose Your Role
                 </Typography>
                 <Grid container spacing={3} justifyContent="center">
@@ -106,36 +120,21 @@ const Home: React.FC = () => {
                 </Grid>
               </Box>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Box
-                component="img"
-                src="/hero-image.png"
-                alt="Waste Management"
-                sx={{
-                  width: '100%',
-                  maxWidth: 500,
-                  height: 'auto',
-                  display: 'block',
-                  margin: 'auto',
-                }}
-              />
-            </Grid>
           </Grid>
         </Container>
       </Box>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth="lg" sx={{ py: 8, textAlign: 'center' }}>
         <Typography
           variant="h3"
           component="h2"
-          align="center"
           gutterBottom
           sx={{ mb: 6 }}
         >
           Our Features
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent="center">
           {features.map((feature, index) => (
             <Grid item xs={12} md={4} key={index}>
               <Card
@@ -166,15 +165,15 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Call to Action */}
-      <Box sx={{ bgcolor: 'secondary.main', color: 'white', py: 8 }}>
+      <Box sx={{ bgcolor: '#C0D5CA', color: 'white', py: 8, textAlign: 'center' }}>
         <Container maxWidth="lg">
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Ready to Make a Difference?
           </Typography>
-          <Typography variant="h6" align="center" paragraph>
+          <Typography variant="h6" paragraph>
             Join our platform and contribute to a cleaner environment.
           </Typography>
-          <Box sx={{ textAlign: 'center', mt: 3 }}>
+          <Box sx={{ mt: 3 }}>
             <Button
               variant="contained"
               color="primary"
