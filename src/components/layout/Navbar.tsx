@@ -20,6 +20,8 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+import trashTruck from '../../assets/JunkOut.jpeg';
+
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
@@ -97,6 +99,7 @@ const Navbar: React.FC = () => {
             mr: 2,
           }}
         >
+          <img src={trashTruck} alt="Trash Truck" style={{ height: 36, marginRight: 12 }} />
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Box
               component="span"

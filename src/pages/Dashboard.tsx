@@ -28,12 +28,21 @@ import {
 import { PickupRequest, User } from '../types';
 import apiService from '../services/api';
 
+const wasteTypes = [
+  'Glass',
+  'Metal',
+  'Plastics',
+  'Paper',
+];
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [pickupRequests, setPickupRequests] = useState<PickupRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedWasteTypes, setSelectedWasteTypes] = useState<string[]>([]);
+  const [wasteSubmitSuccess, setWasteSubmitSuccess] = useState(false);
 
   useEffect(() => {
     const userStr = localStorage.getItem('user');
@@ -65,93 +74,55 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const CustomerDashboard = () => (
-    <Grid container spacing={3}>
-      {/* Summary Cards */}
-      <Grid item xs={12} md={4}>
-        <Paper sx={{ p: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            Total Pickups
-          </Typography>
-          <Typography variant="h3">
-            {pickupRequests.length}
-          </Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <Paper sx={{ p: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            Completed Pickups
-          </Typography>
-          <Typography variant="h3">
-            {pickupRequests.filter(req => req.status === 'completed').length}
-          </Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <Paper sx={{ p: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            Pending Pickups
-          </Typography>
-          <Typography variant="h3">
-            {pickupRequests.filter(req => req.status === 'pending').length}
-          </Typography>
-        </Paper>
-      </Grid>
+  const handleWasteTypeChange = (waste: string) => {
+    setSelectedWasteTypes((prev) =>
+      prev.includes(waste)
+        ? prev.filter((w) => w !== waste)
+        : [...prev, waste]
+    );
+  };
 
-      {/* Recent Pickups */}
-      <Grid item xs={12}>
-        <Paper sx={{ p: 2 }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-            <Typography variant="h6">Recent Pickups</Typography>
+  const handleWasteSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setWasteSubmitSuccess(true);
+    setTimeout(() => setWasteSubmitSuccess(false), 3000);
+  };
+
+  const CustomerDashboard = () => (
+    <Paper sx={{ p: 3, mb: 3 }}>
+      <Typography variant="h6" gutterBottom>
+        Select Waste Types to Dispose
+      </Typography>
+      <form onSubmit={handleWasteSubmit}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 2 }}>
+          {wasteTypes.map((waste) => (
             <Button
-              variant="contained"
-              color="primary"
-              onClick={() => navigate('/request-pickup')}
+              key={waste}
+              variant={selectedWasteTypes.includes(waste) ? 'contained' : 'outlined'}
+              color={selectedWasteTypes.includes(waste) ? 'primary' : 'inherit'}
+              onClick={() => handleWasteTypeChange(waste)}
+              sx={{ minWidth: 120 }}
+              type="button"
             >
-              Request New Pickup
+              {waste}
             </Button>
-          </Box>
-          <Timeline>
-            {pickupRequests.slice(0, 5).map((request) => (
-              <TimelineItem key={request.id}>
-                <TimelineSeparator>
-                  <TimelineDot color={
-                    request.status === 'completed' ? 'success' :
-                    request.status === 'in_progress' ? 'primary' :
-                    request.status === 'pending' ? 'warning' : 'error'
-                  } />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Card>
-                    <CardContent>
-                      <Typography variant="subtitle1">
-                        Pickup #{request.id.slice(0, 8)}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Scheduled for: {new Date(request.scheduledDate).toLocaleDateString()}
-                      </Typography>
-                      <Box sx={{ mt: 1 }}>
-                        <Chip
-                          label={request.status.replace('_', ' ').toUpperCase()}
-                          color={
-                            request.status === 'completed' ? 'success' :
-                            request.status === 'in_progress' ? 'primary' :
-                            request.status === 'pending' ? 'warning' : 'error'
-                          }
-                          size="small"
-                        />
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </TimelineContent>
-              </TimelineItem>
-            ))}
-          </Timeline>
-        </Paper>
-      </Grid>
-    </Grid>
+          ))}
+        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          color="success"
+          disabled={selectedWasteTypes.length === 0}
+        >
+          Submit Waste Types
+        </Button>
+      </form>
+      {wasteSubmitSuccess && (
+        <Alert severity="success" sx={{ mt: 2 }}>
+          Waste types submitted successfully!
+        </Alert>
+      )}
+    </Paper>
   );
 
   const CompanyDashboard = () => (
