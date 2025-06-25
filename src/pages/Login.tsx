@@ -38,7 +38,7 @@ const Login: React.FC = () => {
       newErrors.email = 'Email is required';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'Please enter a valid email address hello';
       isValid = false;
     }
 
