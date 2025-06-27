@@ -17,6 +17,7 @@ import TrackPickup from './pages/TrackPickup';
 import Schedule from './pages/Schedule';
 import Contact from './pages/Contact';
 import Account from './pages/Account';
+import PinLocation from './pages/PinLocation';
 
 const App: React.FC = () => {
   return (
@@ -36,6 +37,7 @@ const App: React.FC = () => {
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/pin-location" element={<PinLocation />} />
             </Routes>
           </main>
           <Footer />

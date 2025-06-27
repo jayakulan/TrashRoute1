@@ -86,6 +86,7 @@ const Dashboard: React.FC = () => {
     e.preventDefault();
     setWasteSubmitSuccess(true);
     setTimeout(() => setWasteSubmitSuccess(false), 3000);
+    navigate('/pin-location');
   };
 
   const CustomerDashboard = () => (
